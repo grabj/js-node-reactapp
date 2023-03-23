@@ -1,0 +1,28 @@
+{
+  "name": "js-node-reactapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/grabj/js-node-reactapp.git",
+  "author": "justa <justyna.grabowska43@gmail.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "be-dev": "npx nodemon src/backend/index.ts",
+    "be-start": "node dist/backend/index.js",
+    "be-build": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@eslint/create-config": "^0.4.2",
+    "@types/node": "^18.15.5",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.6",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  }
+}
