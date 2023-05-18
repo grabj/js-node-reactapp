@@ -17,8 +17,8 @@ export default {
         body('email').isEmail(),
         body('password').not().isEmpty(),
     ],
-    handler: async (req: Request, res: Response) =>
-        handleRequest({
+    handler: async (req: Request, res: Response) => {
+        return handleRequest({
             req,
             res,
             responseSuccessStatus: StatusCodes.CREATED,
@@ -26,15 +26,15 @@ export default {
             execute: async () => {
                 const { email, login, password, imie } = req.body
                 const passwordHash = createHash(password, SALT)
-                return prisma.user.create({
+                return prisma.uSER.create({
                     data: {
-                        id: v4(),
                         email,
                         login,
-                        password: passwordHash,
+                        haslo: passwordHash,
                         imie,
                     },
                 })
             },
-        }),
+        })
+    },
 } as TRoute

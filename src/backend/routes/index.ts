@@ -13,7 +13,8 @@ apiRoutes.forEach((route) =>
 )
 
 router.get('/users', async (req, res) => {
-    await prisma.user.findMany()
+    const arr = await prisma.uSER.findMany()
+    res.send(arr)
 })
 
 export default router
