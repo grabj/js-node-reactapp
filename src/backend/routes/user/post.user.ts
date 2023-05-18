@@ -16,14 +16,13 @@ export default {
         authorize,
         body('email').isEmail(),
         body('password').not().isEmpty(),
-        body('login').not().isEmpty(),
     ],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,
             res,
             responseSuccessStatus: StatusCodes.CREATED,
-            messages: { uniqueConstraintFailed: 'Login must be unique.' },
+            messages: { uniqueConstraintFailed: 'Email must be unique.' },
             execute: async () => {
                 const { email, login, password, imie } = req.body
                 const passwordHash = createHash(password, SALT)
@@ -32,8 +31,8 @@ export default {
                         id: v4(),
                         email,
                         login,
-                        imie,
                         password: passwordHash,
+                        imie,
                     },
                 })
             },

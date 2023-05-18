@@ -26,8 +26,8 @@ model RECENZJE {
 
 model USER {
   id_usera Int    @id @default(autoincrement())
-  login    String @db.VarChar(50) @unique
+  login    String @db.VarChar(50)
   haslo    String @db.VarChar(150)
-  email    String @db.VarChar(150)
+  email    String @db.VarChar(150) @unique
   imie     String @db.VarChar(50)
 }
