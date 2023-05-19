@@ -12,7 +12,6 @@
     "be-start": "npx tsx src/backend/index.ts",
     "be-build": "tsc -p tsconfig.json"
   },
-  "type": "module",
   "devDependencies": {
     "@eslint/create-config": "^0.4.2",
     "@types/cors": "^2.8.13",
