@@ -8,8 +8,7 @@
   "private": true,
   "scripts": {
     "be-dev": "npx nodemon src/backend/App.ts",
-    "be-start1": "node dist/backend/index.js",
-    "be-start": "npx tsx src/backend/index.ts",
+    "be-start": "npx tsx src/backend/App.ts",
     "be-build": "tsc -p tsconfig.json"
   },
   "devDependencies": {
