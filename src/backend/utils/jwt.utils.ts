@@ -2,7 +2,8 @@ import jwt from 'jsonwebtoken'
 export const createToken = (
     payload: object,
     secret: string,
-    expiresIn?: string
+    expiresIn?: string,
+    userId?: number
 ) => {
     return jwt.sign(payload, secret, {
         expiresIn: expiresIn || '30d',

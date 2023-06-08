@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { body } from 'express-validator'
+import { body, sanitizeBody } from 'express-validator'
 import { StatusCodes } from 'http-status-codes'
 import { prisma } from '../../database'
 import { TRoute } from '../types'
@@ -10,7 +10,12 @@ const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 export default {
     method: 'post',
     path: '/api/user',
-    validators: [body('email').isEmail(), body('haslo').not().isEmpty()],
+    validators: [
+        body('email').isEmail(),
+        body('haslo').not().isEmpty(),
+        body('login').not().isEmpty(),
+        body('imie').not().isEmpty(),
+    ],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,

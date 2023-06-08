@@ -11,8 +11,8 @@ const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 const SECRET = (process.env.TOKEN_SECRET as string) ?? 'XYZ'
 
 export default {
-    method: 'get',
-    path: '/api/log',
+    method: 'post',
+    path: '/api/login',
     validators: [body('email').isEmail(), body('haslo').not().isEmpty()],
     handler: async (req: Request, res: Response) =>
         handleRequest({
@@ -25,15 +25,20 @@ export default {
                 const passwordHash = createHash(haslo, SALT)
                 const user = await prisma.uSER.findFirst({ where: { email } })
                 const passwordValid = user ? user.haslo === passwordHash : false
-                if (!user || !passwordValid)
-                    throw {
-                        status: StatusCodes.UNAUTHORIZED,
-                        message: ReasonPhrases.UNAUTHORIZED,
-                        isCustomError: true,
-                    } as TCustomError
-                return {
-                    token: createToken(user, SECRET, '7d'),
+                try {
+                    if (!user || !passwordValid)
+                        throw {
+                            status: StatusCodes.UNAUTHORIZED,
+                            message: ReasonPhrases.UNAUTHORIZED,
+                            isCustomError: true,
+                        } as TCustomError
+                } catch (e) {
+                    console.error(e)
+                    return 'Unauthorized'
                 }
+                const validToken = createToken(user, SECRET, '7d')
+                res.setHeader('Set-Cookie', `Bearer=${validToken}`)
+                return { token: validToken }
             },
         }),
 } as TRoute
