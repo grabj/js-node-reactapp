@@ -14,6 +14,7 @@ export default {
             req,
             res,
             responseSuccessStatus: StatusCodes.OK,
+            responseFailStatus: StatusCodes.UNAUTHORIZED,
             execute: async () => {
                 return await prisma.rECENZJE.findMany()
             },

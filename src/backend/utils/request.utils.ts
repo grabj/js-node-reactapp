@@ -27,23 +27,23 @@ export const handleRequest = async <Entity>({
     if (!errors.isEmpty()) {
         return res
             .status(responseFailStatus ?? StatusCodes.BAD_REQUEST)
-            .json({ errors: errors.array() })
+            .send({ errors: errors.array() })
     }
     try {
         const result = await execute()
-        res.status(responseSuccessStatus ?? StatusCodes.OK).json({
+        res.status(responseSuccessStatus ?? StatusCodes.OK).send({
             data: result,
         })
     } catch (err) {
         console.error(err)
         const parsedError = err as TCustomError
         if (parsedError.isCustomError) {
-            res.status(parsedError.status).json({
+            res.status(parsedError.status).send({
                 errors: [parsedError.message],
             })
         } else {
             const response = checkPrismaError(err, messages)
-            res.status(response.status).json({
+            res.status(response.status).send({
                 errors: [response.message],
             })
         }
