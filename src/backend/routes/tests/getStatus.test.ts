@@ -18,6 +18,17 @@ describe('getStatusHandler', () => {
         await getStatusHandler.handler(req, res)
 
         expect(res.status(StatusCodes.OK))
-        expect(res.send).toHaveBeenCalledWith(`I'm alive!`)
+        expect(res.send).toHaveBeenCalledWith(`Serwer działa prawidłowo`)
+    })
+    it('Zwraca 500 status code w przypadku błędu', async () => {
+        const req = {} as Request
+        const res = {
+            send: jest.fn(),
+            status: jest.fn().mockReturnThis(),
+        } as unknown as Response
+
+        await getStatusHandler.handler(req, res)
+
+        expect(res.status(StatusCodes.INTERNAL_SERVER_ERROR))
     })
 })

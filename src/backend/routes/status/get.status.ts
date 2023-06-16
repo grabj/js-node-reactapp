@@ -5,6 +5,6 @@ export default {
     path: '/api/status',
     validators: [],
     handler: async (req: Request, res: Response) => {
-        res.send(`I'm alive!`)
+        res.send(`Serwer działa prawidłowo`)
     },
 } as TRoute
